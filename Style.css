@@ -1,0 +1,47 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  body {
+    background-color: #070A0F;
+    color: #F5F7FA;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    selection-background-color: #6C63FF;
+    selection-color: #ffffff;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070A0F;
+}
+::-webkit-scrollbar-thumb {
+  background: #111720;
+  border: 1px solid rgba(108, 99, 255, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6C63FF;
+}
+
+/* Glassmorphism Utility */
+.glass-panel {
+  background: rgba(17, 23, 32, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(108, 99, 255, 0.4);
+  box-shadow: 0 0 30px -5px rgba(108, 99, 255, 0.15);
+}
