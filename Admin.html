@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facts'2.0 Studio | Creator Control Panel</title>
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #FF0000;
+            --primary-hover: #d60000;
+            --primary-glow: rgba(255, 0, 0, 0.45);
+            --primary-dim: rgba(255, 0, 0, 0.12);
+            --bg-black: #08090c;
+            --bg-darker: #0d0f14;
+            --bg-card: rgba(18, 21, 28, 0.85);
+            --bg-card-hover: rgba(26, 30, 40, 0.95);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-white: #ffffff;
+            --text-sub: #9ca3af;
+            --text-muted: #64748b;
+            --font-display: 'Orbitron', sans-serif;
+            --font-sub: 'Rajdhani', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition-smooth: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 15%, rgba(255, 0, 0, 0.09) 0%, transparent 45%),
+                radial-gradient(circle at 90% 85%, rgba(255, 0, 0, 0.06) 0%, transparent 50%),
+                linear-gradient(to bottom, #08090c, #0d0f14);
+            background-attachment: fixed;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #08090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2b0b0e;
+            border-radius: 4px;
+            border: 1px solid var(--primary-glow);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Top Navigation Header */
+        .admin-nav {
+            background: rgba(10, 12, 16, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-glass);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.85rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .brand-badge {
+            background: linear-gradient(135deg, var(--primary), #8b0000);
+            padding: 0.35rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            box-shadow: 0 0 14px var(--primary-glow);
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+        }
+
+        .nav-right-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-family: var(--font-sub);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 18px var(--primary-glow);
+            border: 1px solid #ff3333;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.7);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: #ef4444;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+        }
+
+        .btn-sm {
+            padding: 0.35rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .auth-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #150508 0%, #08090c 80%);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .auth-card {
+            background: rgba(18, 21, 28, 0.95);
+            border: 1px solid rgba(255, 0, 0, 0.4);
+            box-shadow: 0 0 45px rgba(255, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 2.8rem 2.2rem;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .auth-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: inline-block;
+            filter: drop-shadow(0 0 15px var(--primary-glow));
+        }
+
+        .auth-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .auth-sub {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex: 1;
+            max-width: 1440px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1.8rem;
+            gap: 1.8rem;
+        }
+
+        .dashboard-sidebar {
+            width: 270px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            padding: 1.2rem;
+            backdrop-filter: blur(12px);
+        }
+
+        .channel-profile-preview {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .channel-avatar {
+            width: 48px;
+            height: 48px;
+            background: #1f0b0e;
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #fff;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            color: var(--text-sub);
+            text-decoration: none;
+            font-family: var(--font-sub);
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: 1px solid transparent;
+            margin-bottom: 0.35rem;
+        }
+
+        .nav-item:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-item.active {
+            color: #fff;
+            background: rgba(255, 0, 0, 0.12);
+            border-color: rgba(255, 0, 0, 0.4);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
+        }
+
+        .badge-count {
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.75rem;
+            font-family: var(--font-body);
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        /* Dashboard Content Panels */
+        .dashboard-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-width: 0;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .panel-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(14px);
+            position: relative;
+        }
+
+        .panel-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.4rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .panel-card-title {
+            font-family: var(--font-sub);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+        }
+
+        .form-full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            font-size: 0.88rem;
+            font-family: var(--font-sub);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-sub);
+        }
+
+        .form-control {
+            width: 100%;
+            background: rgba(10, 12, 16, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            background: rgba(15, 18, 24, 0.95);
+        }
+
+        textarea.form-control {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        /* Video List Styling */
+        .video-item-card {
+            background: rgba(10, 12, 16, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+            transition: var(--transition-smooth);
+        }
+
+        .video-item-card:hover {
+            border-color: rgba(255, 0, 0, 0.4);
+            transform: translateX(4px);
+        }
+
+        .video-thumb-preview {
+            width: 80px;
+            height: 48px;
+            border-radius: 6px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-meta-box {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .video-item-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.2rem;
+        }
+
+        .video-item-sub {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .video-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .preview-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .preview-modal-backdrop.active {
+            display: flex;
+        }
+
+        .preview-modal-box {
+            width: 100%;
+            max-width: 840px;
+            background: #0d0f14;
+            border: 1px solid rgba(255, 0, 0, 0.5);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.35);
+            position: relative;
+        }
+
+        .modal-player-holder {
+            position: relative;
+            padding-top: 56.25%;
+            width: 100%;
+            background: #000;
+        }
+
+        .modal-player-holder iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-close-icon {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition-smooth);
+        }
+
+        .modal-close-icon:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Toast Container */
+        .toast-box {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #0f121a;
+            border: 1px solid var(--primary);
+            border-left: 5px solid var(--primary);
+            color: #fff;
+            padding: 0.9rem 1.4rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            z-index: 2000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition-smooth);
+            pointer-events: none;
+        }
+
+        .toast-box.show {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 900px) {
+            .dashboard-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .dashboard-sidebar {
+                width: 100%;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-overlay" id="authGate">
+        <div class="auth-card">
+            <div class="auth-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h2 class="auth-title">FACTS'2.0 STUDIO</h2>
+            <p class="auth-sub">Enter Creator Passcode to access your portfolio control center.</p>
+
+            <div class="form-group" style="margin-bottom: 1.2rem;">
+                <input type="password" id="passInput" class="form-control" placeholder="Enter Passkey (facts2026)" style="text-align: center; font-size: 1.15rem; letter-spacing: 0.1em;">
+            </div>
+
+            <button class="btn btn-primary" id="btnUnlock" style="width: 100%; padding: 0.8rem;">
+                <i class="fa-solid fa-unlock-keyhole"></i> Access Studio
+            </button>
+
+            <p style="margin-top: 1.5rem; font-size: 0.82rem; color: var(--text-muted);">
+                Default Passkey: <code style="color: #ff5252; background: rgba(255,255,255,0.06); padding: 0.2rem 0.5rem; border-radius: 4px;">facts2026</code>
+            </p>
+        </div>
+    </div>
+
+    <header class="admin-nav">
+        <a href="index.html" class="brand-box" title="View Portfolio Website">
+            <span class="brand-badge"><i class="fa-solid fa-terminal"></i></span>
+            <span class="brand-title">FACTS'<span style="color: var(--primary);">2.0</span> STUDIO OS</span>
+        </a>
+
+        <div class="nav-right-actions">
+            <a href="index.html" target="_blank" class="btn btn-secondary btn-sm" title="Open live portfolio in new tab">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> View Website
+            </a>
+            <button class="btn btn-danger btn-sm" id="btnLockStudio" title="Lock and exit dashboard">
+                <i class="fa-solid fa-lock"></i> Lock
+            </button>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-card">
+                <div class="channel-profile-preview">
+                    <div class="channel-avatar">
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 1.05rem;">Facts'2.0</div>
+                        <div style="color: var(--primary); font-size: 0.8rem; font-weight: 600;">@factss-2.0</div>
+                    </div>
+                </div>
+
+                <div class="nav-item active" data-tab="tabVideos">
+                    <span><i class="fa-solid fa-video" style="margin-right: 0.6rem; color: var(--primary);"></i> Channel Videos</span>
+                    <span class="badge-count" id="badgeVideoCount">0</span>
+                </div>
+
+                <div class="nav-item" data-tab="tabStats">
+                    <span><i class="fa-solid fa-chart-line" style="margin-right: 0.6rem;"></i> Metrics &amp; Stats</span>
+                </div>
+
+                <div class="nav-item" data-tab="tabContent">
+                    <span><i class="fa-solid fa-sliders" style="margin-right: 0.6rem;"></i> Hero &amp; Profile</span>
+                </div>
+
+                <div class="nav-item" data-tab="tabInbox">
+                    <span><i class="fa-solid fa-inbox" style="margin-right: 0.6rem;"></i> Inquiries</span>
+                    <span class="badge-count" id="badgeInboxCount">0</span>
+                </div>
+
+                <div class="nav-item" data-tab="tabSettings">
+                    <span><i class="fa-solid fa-gear" style="margin-right: 0.6rem;"></i> Security &amp; Data</span>
+                </div>
+            </div>
+
+            <!-- Quick Sync Info Card -->
+            <div class="sidebar-card" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                <div style="color: #fff; font-weight: 700; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i class="fa-solid fa-satellite-dish" style="color: #22c55e;"></i> Live Storage Sync
+                </div>
+                Any video, statistic or text modified here saves to your local storage and updates your live portfolio (`index.html`) automatically.
+            </div>
+        </aside>
+
+        <section class="dashboard-content">
+
+            <!-- TAB 1: Channel Videos Manager -->
+            <div class="tab-panel active" id="tabVideos">
+                <!-- Add Single Video -->
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <h3 class="panel-card-title"><i class="fa-solid fa-circle-plus" style="color: var(--primary);"></i> Add A Video</h3>
+                        <span style="font-size: 0.8rem; color: var(--text-sub);">Works with YouTube Shorts and standard videos</span>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="addVidTitle">Video Title</label>
+                            <input type="text" id="addVidTitle" class="form-control" placeholder="e.g. Why Your Cat's Eyes Get So Big! 🐱">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="addVidLink">YouTube Link or Video ID</label>
+                            <input type="text" id="addVidLink" class="form-control" placeholder="https://youtube.com/shorts/iILXQJt_aig or iILXQJt_aig">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="addVidTag">Badge Tag / Status</label>
+                            <input type="text" id="addVidTag" class="form-control" placeholder="e.g. Latest Shorts, Trending, Viral, New">
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: flex-end;">
+                            <button class="btn btn-primary" id="btnAddSingleVideo" style="width: 100%;">
+                                <i class="fa-solid fa-plus"></i> Add Video To Portfolio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk Video Importer -->
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <h3 class="panel-card-title"><i class="fa-solid fa-layer-group" style="color: var(--primary);"></i> Bulk Import Channel Videos</h3>
+                    </div>
+                    <p style="font-size: 0.88rem; color: var(--text-sub); margin-bottom: 0.8rem;">
+                        Paste multiple YouTube links or IDs (one per line or comma-separated). Perfect for adding your entire channel library at once!
+                    </p>
+                    <textarea id="bulkLinksText" class="form-control" placeholder="https://www.youtube.com/shorts/iILXQJt_aig&#10;https://www.youtube.com/watch?v=TOM_hwUMZEE&#10;gTyTfCuP250" style="min-height: 110px; margin-bottom: 1rem;"></textarea>
+                    
+                    <button class="btn btn-secondary" id="btnBulkImport">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Bulk Import All Links
+                    </button>
+                </div>
+
+                <!-- Existing Videos List -->
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <h3 class="panel-card-title">
+                            <i class="fa-solid fa-list-check" style="color: var(--primary);"></i> 
+                            Showcase Videos (<span id="totalVidsCount">0</span>)
+                        </h3>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-secondary btn-sm" id="btnRestoreOfficialVids" title="Restore official Facts'2.0 defaults">
+                                <i class="fa-solid fa-rotate-left"></i> Restore Defaults
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="videoListHolder">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tabStats">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <h3 class="panel-card-title"><i class="fa-solid fa-chart-pie" style="color: var(--primary);"></i> Channel Analytics Showcase</h3>
+                        <span style="font-size: 0.8rem; color: var(--text-sub);">Updates counter blocks on the home page</span>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="metricSubs">Subscriber Count</label>
+                            <input type="text" id="metricSubs" class="form-control" value="285K+">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="metricViews">Total Channel Views</label>
+                            <input type="text" id="metricViews" class="form-control" value="18.4M+">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="metricUploads">Total Videos Uploaded</label>
+                            <input type="text" id="metricUploads" class="form-control" value="120+">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="metricApproval">Approval / Like Ratio</label>
+                            <input type="text" id="metricApproval" class="form-control" value="99.4%">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" id="btnSaveStats" style="margin-top: 0.5rem;">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Metrics
+                    </button>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tabContent">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <h3 class="panel-card-title"><i class="fa-solid fa-pen-nib" style="color: var(--primary);"></i> Branding &amp; Content</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="contentTagline">Header Transmission Tag</label>
+                        <input type="text" id="contentTagline" class="form-control" value="Official Channel Hub • @factss-2.0">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="contentSubtitle">Hero Subtitle</label>
+                        <textarea id="contentSubtitle" class="form-control">Welcome to Facts'2.0 — Explore mind-bending science, mysterious facts, future technology, and unbelievable real-world secrets.</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="contentBio">About Section Description</label>
+                        <textarea id="contentBio" class="form-control">Facts'2.0 brings you high-energy, deeply researched videos exploring science trivia, technological breakthroughs, world mysteries, and mind-expanding facts that leave you curious.</textarea>
+                    </div>
+
+                    <button class="btn btn-primary" id="btnSaveContent">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Branding
+                    </button>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tabInbox">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <h3 class="panel-card-title">
+                            <i class="fa-solid fa-envelope-open-text" style="color: var(--primary);"></i> 
+                            Inbox Transmissions (<span id="inboxTotalCount">0</span>)
+                        </h3>
+                        <button class="btn btn-danger btn-sm" id="btnClearInbox">
+                            <i class="fa-solid fa-trash"></i> Clear Inbox
+                        </button>
+                    </div>
+
+                    <div id="inboxListHolder">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tabSettings">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <h3 class="panel-card-title"><i class="fa-solid fa-key" style="color: var(--primary);"></i> Change Passkey</h3>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="newPasscode">New Passcode</label>
+                            <input type="password" id="newPasscode" class="form-control" placeholder="Enter new passcode">
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: flex-end;">
+                            <button class="btn btn-primary" id="btnUpdatePasscode" style="width: 100%;">
+                                <i class="fa-solid fa-check"></i> Update Passkey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <h3 class="panel-card-title"><i class="fa-solid fa-file-export" style="color: var(--primary);"></i> Backup &amp; Export</h3>
+                    </div>
+                    <p style="font-size: 0.88rem; color: var(--text-sub); margin-bottom: 1rem;">
+                        Export all your videos and site configuration as a JSON file or copy to your clipboard for safe-keeping.
+                    </p>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" id="btnExportJson">
+                            <i class="fa-solid fa-copy"></i> Copy JSON to Clipboard
+                        </button>
+                        <button class="btn btn-danger btn-sm" id="btnResetAllData">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Factory Reset All Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <div class="preview-modal-backdrop" id="previewModal">
+        <div class="preview-modal-box">
+            <button class="modal-close-icon" id="btnClosePreview" aria-label="Close Preview">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-player-holder" id="playerHolder"></div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast-box" id="toastBox">
+        <i class="fa-solid fa-circle-check" style="color: var(--primary); font-size: 1.3rem;"></i>
+        <div>
+            <h4 style="margin: 0; font-size: 0.95rem; font-family: var(--font-sub);" id="toastTitle">Notification</h4>
+            <p style="margin: 0; font-size: 0.82rem; color: var(--text-sub);" id="toastMsg">Action completed successfully.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Shared Storage Keys
+            const STORAGE_VIDEOS = "facts2_creator_videos_master";
+            const STORAGE_STATS = "facts2_creator_stats";
+            const STORAGE_CONTENT = "facts2_creator_content";
+            const STORAGE_INBOX = "facts2_creator_inquiries";
+            const STORAGE_PASS = "facts2_admin_passcode";
+
+            // Official channel default video library
+            const DEFAULT_VIDEOS = [
+                {
+                    title: "Why Your Cat's Eyes Get So Big! 🐱 - Facts'2.0",
+                    id: "iILXQJt_aig",
+                    pubDate: "Latest Video",
+                    thumbnail: "https://i.ytimg.com/vi/iILXQJt_aig/hqdefault.jpg"
+                },
+                {
+                    title: "Duniya Ki Sabse Lambi Cheezein! 😱 #Facts'2.0",
+                    id: "gTyTfCuP250",
+                    pubDate: "Trending Video",
+                    thumbnail: "https://i.ytimg.com/vi/gTyTfCuP250/hqdefault.jpg"
+                },
+                {
+                    title: "How to make a thing 😱 - Facts'2.0",
+                    id: "TOM_hwUMZEE",
+                    pubDate: "Popular Video",
+                    thumbnail: "https://i.ytimg.com/vi/TOM_hwUMZEE/hqdefault.jpg"
+                },
+                {
+                    title: "Ye Gaana Sunke Padhai Karne Ka Man Karega! 😂 #Facts'2.0",
+                    id: "uRunKKynLgg",
+                    pubDate: "Recent Release",
+                    thumbnail: "https://i.ytimg.com/vi/uRunKKynLgg/hqdefault.jpg"
+                },
+                {
+                    title: "Worst Life Hacks Ever Tested! ❌ - Facts'2.0",
+                    id: "LFbijxj0Fsk",
+                    pubDate: "Channel Highlight",
+                    thumbnail: "https://i.ytimg.com/vi/LFbijxj0Fsk/hqdefault.jpg"
+                },
+                {
+                    title: "One Subscribe = Your Name on the Car! ✍️ #Facts'2.0",
+                    id: "703OIlI3J4k",
+                    pubDate: "Community Special",
+                    thumbnail: "https://i.ytimg.com/vi/703OIlI3J4k/hqdefault.jpg"
+                }
+            ];
+
+            const authGate = document.getElementById('authGate');
+            const passInput = document.getElementById('passInput');
+            const btnUnlock = document.getElementById('btnUnlock');
+            const btnLockStudio = document.getElementById('btnLockStudio');
+
+            function getActivePasscode() {
+                return localStorage.getItem(STORAGE_PASS) || "facts2026";
+            }
+
+            btnUnlock.addEventListener('click', () => {
+                const entered = passInput.value.trim();
+                if (entered === getActivePasscode()) {
+                    authGate.style.display = 'none';
+                    passInput.value = '';
+                    loadAllDashboardData();
+                    showToast('Studio Unlocked', 'Welcome to Facts\'2.0 Control Panel!');
+                } else {
+                    showToast('Wrong Passkey', 'Please verify your creator passcode.');
+                    passInput.value = '';
+                }
+            });
+
+            passInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') btnUnlock.click();
+            });
+
+            btnLockStudio.addEventListener('click', () => {
+                authGate.style.display = 'flex';
+                passInput.focus();
+                showToast('Studio Locked', 'Control panel has been locked.');
+            });
+
+            const navItems = document.querySelectorAll('.nav-item');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const target = item.getAttribute('data-tab');
+                    if (!target) return;
+
+                    navItems.forEach(n => n.classList.remove('active'));
+                    tabPanels.forEach(p => p.classList.remove('active'));
+
+                    item.classList.add('active');
+                    const panel = document.getElementById(target);
+                    if (panel) panel.classList.add('active');
+                });
+            });
+
+            function extractYouTubeId(urlOrId) {
+                if (!urlOrId) return null;
+                const trimmed = urlOrId.trim();
+                const regex = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/)|youtu\.be\/|\/shorts\/)([a-zA-Z0-9_-]{11})/;
+                const match = trimmed.match(regex);
+                if (match && match[1]) return match[1];
+                if (trimmed.length === 11 && /^[a-zA-Z0-9_-]+$/.test(trimmed)) return trimmed;
+                return null;
+            }
+
+            function loadVideos() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_VIDEOS);
+                    if (raw) {
+                        const parsed = JSON.parse(raw);
+                        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                    }
+                } catch(e) {}
+                return DEFAULT_VIDEOS;
+            }
+
+            function saveVideos(list) {
+                localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(list));
+                renderVideosList();
+            }
+
+            const videoListHolder = document.getElementById('videoListHolder');
+            const totalVidsCount = document.getElementById('totalVidsCount');
+            const badgeVideoCount = document.getElementById('badgeVideoCount');
+
+            function renderVideosList() {
+                const list = loadVideos();
+                totalVidsCount.textContent = list.length;
+                badgeVideoCount.textContent = list.length;
+
+                if (list.length === 0) {
+                    videoListHolder.innerHTML = `<p style="color: var(--text-muted); text-align: center; padding: 2rem;">No videos present. Add your channel videos above!</p>`;
+                    return;
+                }
+
+                videoListHolder.innerHTML = list.map((item, idx) => `
+                    <div class="video-item-card">
+                        <img src="${item.thumbnail}" alt="" class="video-thumb-preview" onerror="this.src='https://i.ytimg.com/vi/${item.id}/hqdefault.jpg'">
+                        <div class="video-meta-box">
+                            <div class="video-item-title" title="${item.title}">${item.title}</div>
+                            <div class="video-item-sub">
+                                <span style="color: var(--primary);"><i class="fa-solid fa-tag"></i> ${item.pubDate || 'Channel Video'}</span>
+                                <span>ID: <code style="color: #cbd5e1;">${item.id}</code></span>
+                            </div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn btn-secondary btn-sm" onclick="window.previewVideoModal('${item.id}')" title="Play Video">
+                                <i class="fa-solid fa-play"></i>
+                            </button>
+                            <button class="btn btn-secondary btn-sm" onclick="window.moveVideoUp(${idx})" title="Move Up">
+                                <i class="fa-solid fa-arrow-up"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="window.deleteVideoItem(${idx})" title="Delete Video">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Global Handlers for video item actions
+            window.deleteVideoItem = function(idx) {
+                const list = loadVideos();
+                list.splice(idx, 1);
+                saveVideos(list);
+                showToast('Removed', 'Video removed from showcase.');
+            };
+
+            window.moveVideoUp = function(idx) {
+                if (idx === 0) return;
+                const list = loadVideos();
+                const temp = list[idx];
+                list[idx] = list[idx - 1];
+                list[idx - 1] = temp;
+                saveVideos(list);
+            };
+
+            window.previewVideoModal = function(vidId) {
+                const player = document.getElementById('playerHolder');
+                const modal = document.getElementById('previewModal');
+                player.innerHTML = `
+                    <iframe 
+                        src="https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&rel=0" 
+                        title="Video Preview" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                `;
+                modal.classList.add('active');
+            };
+
+            document.getElementById('btnClosePreview').addEventListener('click', () => {
+                document.getElementById('previewModal').classList.remove('active');
+                document.getElementById('playerHolder').innerHTML = '';
+            });
+
+            // Add Single Video
+            document.getElementById('btnAddSingleVideo').addEventListener('click', () => {
+                const titleInput = document.getElementById('addVidTitle');
+                const linkInput = document.getElementById('addVidLink');
+                const tagInput = document.getElementById('addVidTag');
+
+                const parsedId = extractYouTubeId(linkInput.value);
+                if (!parsedId) {
+                    showToast('Invalid Input', 'Please enter a valid YouTube Video Link or 11-digit ID.');
+                    return;
+                }
+
+                const title = titleInput.value.trim() || `Facts'2.0 Video (${parsedId})`;
+                const tag = tagInput.value.trim() || "Channel Highlight";
+
+                const list = loadVideos();
+                list.unshift({
+                    title: title,
+                    id: parsedId,
+                    pubDate: tag,
+                    thumbnail: `https://i.ytimg.com/vi/${parsedId}/hqdefault.jpg`
+                });
+
+                saveVideos(list);
+                titleInput.value = '';
+                linkInput.value = '';
+                tagInput.value = '';
+                showToast('Video Added', 'New video is live on your portfolio!');
+            });
+
+            // Bulk Add Videos
+            document.getElementById('btnBulkImport').addEventListener('click', () => {
+                const raw = document.getElementById('bulkLinksText').value.trim();
+                if (!raw) {
+                    showToast('Empty Input', 'Paste some YouTube links first.');
+                    return;
+                }
+
+                const lines = raw.split(/[\n,]+/);
+                const list = loadVideos();
+                let count = 0;
+
+                lines.forEach(line => {
+                    const id = extractYouTubeId(line);
+                    if (id && !list.some(v => v.id === id)) {
+                        list.push({
+                            title: `Facts'2.0 Channel Video (${id})`,
+                            id: id,
+                            pubDate: "Channel Video",
+                            thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+                        });
+                        count++;
+                    }
+                });
+
+                if (count > 0) {
+                    saveVideos(list);
+                    document.getElementById('bulkLinksText').value = '';
+                    showToast('Import Complete', `Successfully imported ${count} channel videos!`);
+                } else {
+                    showToast('Notice', 'No new or valid video links were detected.');
+                }
+            });
+
+            // Restore Defaults
+            document.getElementById('btnRestoreOfficialVids').addEventListener('click', () => {
+                saveVideos(DEFAULT_VIDEOS);
+                showToast('Restored', 'Official channel video defaults restored.');
+            });
+
+            function loadStats() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_STATS);
+                    if (raw) {
+                        const parsed = JSON.parse(raw);
+                        document.getElementById('metricSubs').value = parsed.subs || "285K+";
+                        document.getElementById('metricViews').value = parsed.views || "18.4M+";
+                        document.getElementById('metricUploads').value = parsed.uploads || "120+";
+                        document.getElementById('metricApproval').value = parsed.approval || "99.4%";
+                    }
+                } catch(e) {}
+            }
+
+            document.getElementById('btnSaveStats').addEventListener('click', () => {
+                const stats = {
+                    subs: document.getElementById('metricSubs').value.trim(),
+                    views: document.getElementById('metricViews').value.trim(),
+                    uploads: document.getElementById('metricUploads').value.trim(),
+                    approval: document.getElementById('metricApproval').value.trim(),
+                };
+                localStorage.setItem(STORAGE_STATS, JSON.stringify(stats));
+                showToast('Stats Saved', 'Metrics updated for your portfolio!');
+            });
+
+            function loadContent() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_CONTENT);
+                    if (raw) {
+                        const parsed = JSON.parse(raw);
+                        if (parsed.tag) document.getElementById('contentTagline').value = parsed.tag;
+                        if (parsed.hero) document.getElementById('contentSubtitle').value = parsed.hero;
+                        if (parsed.bio) document.getElementById('contentBio').value = parsed.bio;
+                    }
+                } catch(e) {}
+            }
+
+            document.getElementById('btnSaveContent').addEventListener('click', () => {
+                const content = {
+                    tag: document.getElementById('contentTagline').value.trim(),
+                    hero: document.getElementById('contentSubtitle').value.trim(),
+                    bio: document.getElementById('contentBio').value.trim(),
+                };
+                localStorage.setItem(STORAGE_CONTENT, JSON.stringify(content));
+                showToast('Content Saved', 'Header & bio updated successfully!');
+            });
+
+            function loadInbox() {
+                try {
+                    return JSON.parse(localStorage.getItem(STORAGE_INBOX)) || [];
+                } catch(e) { return []; }
+            }
+
+            function renderInbox() {
+                const list = loadInbox();
+                const container = document.getElementById('inboxListHolder');
+                document.getElementById('inboxTotalCount').textContent = list.length;
+                document.getElementById('badgeInboxCount').textContent = list.length;
+
+                if (list.length === 0) {
+                    container.innerHTML = `<p style="color: var(--text-muted); text-align: center; padding: 2rem;">Your inbox is empty. No transmissions received yet.</p>`;
+                    return;
+                }
+
+                container.innerHTML = list.map((item, idx) => `
+                    <div style="background: rgba(10,12,16,0.85); border: 1px solid rgba(255,255,255,0.08); padding: 1.2rem; border-radius: 10px; margin-bottom: 0.9rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+                            <div>
+                                <strong style="font-size: 1.05rem; color: #fff;">${item.name}</strong>
+                                <span style="background: rgba(255,0,0,0.15); color: #ff5252; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-left: 0.5rem;">${item.type}</span>
+                            </div>
+                            <span style="font-size: 0.8rem; color: var(--text-muted);">${item.date || 'Recent'}</span>
+                        </div>
+                        <p style="color: #cbd5e1; font-size: 0.92rem; margin-bottom: 0.8rem; line-height: 1.6;">${item.message}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <a href="mailto:${item.email}?subject=Reply from Facts'2.0" class="btn btn-secondary btn-sm" style="text-decoration: none;">
+                                <i class="fa-solid fa-reply"></i> Reply (${item.email})
+                            </a>
+                            <button class="btn btn-danger btn-sm" onclick="window.deleteInboxItem(${idx})">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            window.deleteInboxItem = function(idx) {
+                const list = loadInbox();
+                list.splice(idx, 1);
+                localStorage.setItem(STORAGE_INBOX, JSON.stringify(list));
+                renderInbox();
+                showToast('Deleted', 'Inquiry message removed.');
+            };
+
+            document.getElementById('btnClearInbox').addEventListener('click', () => {
+                localStorage.removeItem(STORAGE_INBOX);
+                renderInbox();
+                showToast('Inbox Cleared', 'All messages removed.');
+            });
+
+            document.getElementById('btnUpdatePasscode').addEventListener('click', () => {
+                const newPass = document.getElementById('newPasscode').value.trim();
+                if (newPass.length < 4) {
+                    showToast('Short Passcode', 'Passcode must be at least 4 characters.');
+                    return;
+                }
+                localStorage.setItem(STORAGE_PASS, newPass);
+                document.getElementById('newPasscode').value = '';
+                showToast('Passkey Updated', 'New passcode is active!');
+            });
+
+            document.getElementById('btnExportJson').addEventListener('click', () => {
+                const dump = {
+                    videos: loadVideos(),
+                    stats: localStorage.getItem(STORAGE_STATS) ? JSON.parse(localStorage.getItem(STORAGE_STATS)) : null,
+                    content: localStorage.getItem(STORAGE_CONTENT) ? JSON.parse(localStorage.getItem(STORAGE_CONTENT)) : null
+                };
+
+                const str = JSON.stringify(dump, null, 2);
+                const tempTextArea = document.createElement("textarea");
+                tempTextArea.value = str;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempTextArea);
+
+                showToast('Copied', 'All configuration JSON copied to clipboard!');
+            });
+
+            document.getElementById('btnResetAllData').addEventListener('click', () => {
+                localStorage.removeItem(STORAGE_VIDEOS);
+                localStorage.removeItem(STORAGE_STATS);
+                localStorage.removeItem(STORAGE_CONTENT);
+                localStorage.removeItem(STORAGE_INBOX);
+                localStorage.removeItem(STORAGE_PASS);
+                loadAllDashboardData();
+                showToast('Reset Complete', 'All settings restored to factory defaults.');
+            });
+
+            const toastBox = document.getElementById('toastBox');
+            function showToast(title, message) {
+                document.getElementById('toastTitle').textContent = title;
+                document.getElementById('toastMsg').textContent = message;
+                toastBox.classList.add('show');
+                setTimeout(() => toastBox.classList.remove('show'), 3500);
+            }
+
+            function loadAllDashboardData() {
+                renderVideosList();
+                loadStats();
+                loadContent();
+                renderInbox();
+            }
+
+            // Auto-focus passcode on page load
+            passInput.focus();
+        });
+    </script>
+</body>
+</html>
+
