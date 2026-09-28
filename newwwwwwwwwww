@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary Dynamic SEO Meta Tags -->
+  <title id="meta-page-title">GrowthHub — Digital Marketing, Performance Ads & Video Editing</title>
+  <meta name="title" id="meta-title" content="GrowthHub — Digital Marketing, Performance Ads & Video Editing" />
+  <meta name="description" id="meta-description" content="GrowthHub helps businesses, creators and brands scale through strategic Google Ads, Meta Ads, Social Media Management, and High-Retention Video Editing. 1.5+ years of proven digital expertise." />
+  <meta name="keywords" id="meta-keywords" content="Digital Marketing Agency, Google Ads Management, Meta Ads Management, Facebook Ads, Instagram Ads, Social Media Management, Video Editing Services, YouTube Shorts Editing, Reels Editing, Performance Marketing India" />
+  <meta name="author" content="GrowthHub" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" id="meta-canonical" href="https://growthhub-2.vercel.app/" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://growthhub-2.vercel.app/" />
+  <meta property="og:title" id="og-title" content="GrowthHub — Turn Attention Into Growth" />
+  <meta property="og:description" id="og-description" content="Performance marketing, strategic social media, and high-impact video editing designed to attract attention and drive meaningful action." />
+  <meta property="og:image" content="https://placehold.co/1200x630/08090D/00F59B?text=GrowthHub+Agency" />
+
+  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#07080B',
+              dark: '#0D0F15',
+              surface: '#121620',
+              card: '#161B27',
+              border: 'rgba(255, 255, 255, 0.08)',
+              green: '#00F59B',       /* Default Growth electric green */
+              greenHover: '#00D686',
+              greenGlow: 'rgba(0, 245, 155, 0.22)',
+              cyan: '#38BDF8',
+              purple: '#A855F7',
+              muted: '#94A3B8',
+              light: '#F8FAFC'
+            }
+          },
+          fontFamily: {
+            heading: ['"Space Grotesk"', 'sans-serif'],
+            body: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          boxShadow: {
+            'glow-sm': '0 0 15px var(--accent-glow, rgba(0, 245, 155, 0.2))',
+            'glow-md': '0 0 30px var(--accent-glow, rgba(0, 245, 155, 0.25))',
+            'glow-lg': '0 0 50px var(--accent-glow, rgba(0, 245, 155, 0.3))',
+            'card-dark': '0 10px 30px -10px rgba(0, 0, 0, 0.7)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --accent-color: #00F59B;
+      --accent-glow: rgba(0, 245, 155, 0.25);
+      --accent-hover: #00D686;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #07080B;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e2433;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-color);
+    }
+
+    .bg-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    
+    .glass-nav {
+      background: rgba(7, 8, 11, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .glass-card {
+      background: rgba(18, 22, 32, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(0, 245, 155, 0.35);
+      box-shadow: 0 10px 30px -10px rgba(0, 245, 155, 0.15);
+    }
+
+    .admin-card {
+      background: #121620;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .admin-input {
+      background-color: #0D0F15;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #F8FAFC;
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      width: 100%;
+      transition: all 0.2s;
+    }
+    .admin-input:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 2px var(--accent-glow);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.04); }
+    }
+    .animate-ambient-glow {
+      animation: pulseGlow 7s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-brand-black text-brand-light font-body antialiased selection:bg-brand-green selection:text-brand-black overflow-x-hidden min-h-screen relative">
+
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-green/15 rounded-full blur-[140px] animate-ambient-glow"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-brand-cyan/10 rounded-full blur-[140px]"></div>
+    <div class="absolute -bottom-40 left-1/4 w-[500px] h-[500px] bg-brand-purple/10 rounded-full blur-[160px]"></div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TOP ADMIN DRAFT / LIVE BAR (When in Admin Mode) -->
+  <!-- ========================================== -->
+  <div id="admin-bar-notice" class="hidden sticky top-0 z-[60] bg-brand-surface/95 border-b border-brand-green/40 px-4 py-2 text-xs flex items-center justify-between backdrop-blur-md">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-brand-green animate-ping"></span>
+      <span class="font-mono text-white font-semibold">GrowthHub CMS Active</span>
+      <span class="text-slate-400 hidden sm:inline">| Changes synced directly to site</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="btn-toggle-view" class="px-3 py-1 rounded-lg bg-brand-green text-brand-black font-semibold text-xs hover:bg-brand-greenHover transition-all flex items-center gap-1.5 shadow-glow-sm">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <span id="btn-toggle-view-text">Open Admin CMS</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 1. PUBLIC WEBSITE VIEW                                         -->
+  <!-- ============================================================== -->
+  <div id="public-website-view" class="transition-opacity duration-300">
+    
+    <!-- Header / Sticky Navigation -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 glass-nav border-b border-brand-border">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+          
+          <!-- Logo System -->
+          <a href="#home" class="flex items-center gap-3 group focus:outline-none" aria-label="GrowthHub Home">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-surface to-brand-card border border-brand-border flex items-center justify-center relative overflow-hidden group-hover:border-brand-green transition-colors">
+              <span class="absolute inset-0 bg-brand-green/10 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              <svg class="w-5 h-5 text-brand-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 3 3 9 8 8 7-7-8-8-9-3z"/>
+                <path d="M14 6l4 4"/>
+                <circle cx="7" cy="17" r="3" fill="#00F59B" stroke="none" />
+              </svg>
+            </div>
+            <div class="flex flex-col">
+              <span id="site-logo-text" class="font-heading text-xl font-bold tracking-tight text-white flex items-center gap-1">
+                GROWTH<span class="text-brand-green">HUB</span>
+              </span>
+              <span id="site-logo-sub" class="text-[10px] tracking-wider uppercase text-brand-muted -mt-1 font-medium">Digital Agency</span>
+            </div>
+          </a>
+
+          <!-- Desktop Navigation -->
+          <nav id="desktop-nav-links" class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300" aria-label="Main Navigation">
+            <a href="#home" class="hover:text-brand-green transition-colors py-1">Home</a>
+            <a href="#services" class="hover:text-brand-green transition-colors py-1">Services</a>
+            <a href="#about" class="hover:text-brand-green transition-colors py-1">About</a>
+            <a href="#portfolio" class="hover:text-brand-green transition-colors py-1">Portfolio</a>
+            <a href="#youtube" class="hover:text-brand-green transition-colors py-1">YouTube</a>
+            <a href="#contact" class="hover:text-brand-green transition-colors py-1">Contact</a>
+          </nav>
+
+          <!-- Topbar Actions -->
+          <div class="hidden md:flex items-center gap-3">
+            <!-- Discreet Admin Portal Link -->
+            <button onclick="router.navigate('/admin')" title="Access Admin CMS" class="p-2 rounded-xl text-slate-400 hover:text-brand-green hover:bg-brand-surface/80 border border-transparent hover:border-brand-border transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            </button>
+
+            <!-- WhatsApp Primary CTA -->
+            <a href="#contact" id="nav-primary-cta" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm text-brand-black bg-brand-green hover:bg-brand-greenHover transition-all shadow-glow-sm hover:shadow-glow-md transform hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z"/></svg>
+              <span id="nav-cta-label">Let's Talk</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="flex items-center gap-2 md:hidden">
+            <button onclick="router.navigate('/admin')" title="Access Admin CMS" class="p-2 rounded-lg text-slate-400 hover:text-brand-green">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            </button>
+            <button id="mobile-menu-btn" type="button" class="p-2 rounded-lg text-slate-300 hover:text-brand-green hover:bg-brand-surface" aria-label="Toggle mobile menu">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-menu" class="hidden md:hidden glass-nav border-b border-brand-border px-4 pt-3 pb-6 space-y-3">
+        <a href="#home" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:text-brand-green">Home</a>
+        <a href="#services" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:text-brand-green">Services</a>
+        <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:text-brand-green">About</a>
+        <a href="#portfolio" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:text-brand-green">Portfolio</a>
+        <a href="#youtube" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:text-brand-green">YouTube</a>
+        <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:text-brand-green">Contact</a>
+        <div class="pt-2 flex flex-col gap-2">
+          <a href="#contact" class="mobile-nav-link flex items-center justify-center gap-2 w-full py-3 rounded-xl font-semibold text-brand-black bg-brand-green shadow-glow-sm">
+            <span>Let's Talk on WhatsApp</span>
+          </a>
+          <button onclick="router.navigate('/admin')" class="py-2.5 text-xs text-slate-400 hover:text-white flex items-center justify-center gap-1.5 border border-brand-border rounded-xl">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <span>Admin Control Panel</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN HERO SECTION -->
+    <section id="home" class="min-h-[92vh] flex items-center justify-center relative overflow-hidden pt-28 pb-16 lg:py-28 bg-grid">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Hero Copy -->
+          <div class="lg:col-span-7 text-left space-y-6">
+            
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-brand-surface/90 border border-brand-green/30 text-xs font-semibold text-slate-300">
+              <span class="w-2 h-2 rounded-full bg-brand-green animate-ping"></span>
+              <span id="hero-badge-experience" class="text-brand-green font-bold">1.5+ Years</span>
+              <span id="hero-badge-label" class="text-slate-400">of Digital Marketing Experience</span>
+            </div>
+
+            <h1 id="hero-main-headline" class="text-4xl sm:text-6xl xl:text-7xl font-bold font-heading tracking-tight text-white leading-[1.08]">
+              Turn Attention <br />
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-300 to-brand-cyan">
+                Into Growth.
+              </span>
+            </h1>
+
+            <p id="hero-subheadline" class="text-lg sm:text-xl text-slate-400 max-w-2xl font-normal leading-relaxed">
+              GrowthHub helps businesses, creators and brands grow through strategic performance marketing, social media management, and creative content engineered to capture attention and trigger high-intent action.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+              <a href="#contact" id="hero-primary-btn" class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold text-base text-brand-black bg-brand-green hover:bg-brand-greenHover transition-all shadow-glow-sm hover:shadow-glow-md transform hover:-translate-y-0.5">
+                <span id="hero-primary-btn-text">Get Started</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </a>
+
+              <a href="#services" id="hero-secondary-btn" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-slate-200 bg-brand-surface hover:bg-brand-card border border-brand-border transition-all">
+                <span id="hero-secondary-btn-text">Explore Services</span>
+              </a>
+            </div>
+
+            <!-- Honest Capability Badges -->
+            <div class="pt-6 border-t border-brand-border/60 grid grid-cols-3 gap-4 max-w-lg">
+              <div>
+                <div id="stat-1-val" class="text-xl sm:text-2xl font-bold font-heading text-white">Google & Meta</div>
+                <div id="stat-1-lbl" class="text-xs text-slate-400">Certified Ad Practice</div>
+              </div>
+              <div>
+                <div id="stat-2-val" class="text-xl sm:text-2xl font-bold font-heading text-white">Full-Funnel</div>
+                <div id="stat-2-lbl" class="text-xs text-slate-400">Content & Ads</div>
+              </div>
+              <div>
+                <div id="stat-3-val" class="text-xl sm:text-2xl font-bold font-heading text-white">Video First</div>
+                <div id="stat-3-lbl" class="text-xs text-slate-400">Shorts & Reels Focus</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Hero Abstract Growth Graphic -->
+          <div class="lg:col-span-5 relative flex items-center justify-center">
+            <div class="w-full max-w-md p-6 rounded-3xl glass-card relative overflow-hidden group shadow-card-dark">
+              <div class="absolute -top-24 -right-24 w-52 h-52 bg-brand-green/20 rounded-full blur-3xl pointer-events-none"></div>
+
+              <div class="flex items-center justify-between border-b border-brand-border pb-4 mb-6">
+                <div class="flex items-center gap-2">
+                  <div class="w-3 h-3 rounded-full bg-brand-green"></div>
+                  <span class="text-xs font-mono uppercase tracking-wider text-slate-300">GROWTH_ENGINE // ACTIVE</span>
+                </div>
+                <span class="text-[11px] font-mono text-brand-green bg-brand-green/10 px-2 py-0.5 rounded border border-brand-green/20">Targeting On</span>
+              </d
